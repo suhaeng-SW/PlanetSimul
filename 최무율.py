@@ -1,8 +1,7 @@
-
 # 입력 및 입력값 자료 저장
 def star_input():
     try:
-        res = input('중심 항성의 질량(kg), 추가하실 공전 행성의 개수를\n공백으로 구분하여 차례로 입력하세요\n>_ ').split()
+        res = input('\n중심 항성의 질량(kg), 추가하실 공전 행성의 개수를\n공백으로 구분하여 차례로 입력하세요\n>_ ').split()
         mass,N = float(res[0]), int(res[1])
 
         if mass <= 0 or N <= 0:
@@ -11,10 +10,12 @@ def star_input():
         return mass,N
     
     except (ValueError, IndexError) as e:
-        print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
+        print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
         return star_input()
 
 def input_values():
+    global planet_info
+
     star_mass,N = star_input()
     planet_info = {}
 
@@ -34,7 +35,7 @@ def input_values():
                 break
 
             except ValueError as e:
-                print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
+                print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
 
     return star_mass, planet_info
 
@@ -58,21 +59,24 @@ def cal_oval(G,M,planet):
 
 # 매뉴얼 출력 및 기능 수행
 def input_manual():
-    order = -1
-    while order != 0:
-        print('-------------------------------')
-        print('1. 중심항성 질량 수정')
-        print('2. 공전행성 정보 수정 및 추가')
-        print('3. 공전행성 정보 삭제')
-        print('0. 프로그램 종료')
-        print('-------------------------------')
-        
-        try:
-            order = input('사용할 기능의 숫자를 입력하세요\n>_ ')
-            order = int(order)
-        except ValueError as e:
-            print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
-
-
-input_values()
-input_manual()
+    print('\n-------------------------------')
+    print('매뉴얼 \n')
+    print('1. 중심항성 질량 수정')
+    print('2. 공전행성 정보 수정 및 추가')
+    print('3. 공전행성 정보 삭제')
+    print('4. 현재 궤도시스템 정보 출력')
+    print('0. 프로그램 종료')
+    print('-------------------------------')
+    
+    try:
+        order = input('사용할 기능의 숫자를 입력하세요\n>_ ')
+        order = int(order)
+        return order
+    except ValueError as e:
+        print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+        return input_manual()
+    
+def sort_and_print(star_mass,planet_info):
+    print(f'\n항성 질량 : {star_mass}kg, 구성 행성 수 : {len(planet_info)}')
+    for planet in sorted(planet_info.items(), key=lambda x : x[0]):
+        print(*planet)
