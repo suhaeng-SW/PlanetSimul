@@ -11,7 +11,7 @@ def star_input():
         return mass,N
     
     except (ValueError, IndexError) as e:
-        print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요. \n{e}\n')
+        print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
         return star_input()
 
 def input_values():
@@ -34,20 +34,45 @@ def input_values():
                 break
 
             except ValueError as e:
-                print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요. \n{e}\n')
+                print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
 
     return star_mass, planet_info
-    
-input_values()
+
 
 # 그래프 계산
 def cal_oval(G,M,planet):
-    r0 = planet['peri_dist']
-    v0 = planet['peri_speed']
-    e = planet['eccentricity']
+    #from 이원준 import cal_ecc
     
-    L_radius = (2/r0 - v0/G*M)*-1
+    AU__m = 1.5*10**11
+    km__m = 1000
+
+    r0_m = planet['peri_dist'] * AU__m
+    v0_m = planet['peri_speed'] * km__m
+    L_radius = (2/r0_m - v0_m**2/(G*M))**-1 / AU__m
+
+    e = cal_ecc(planet,L_radius)
     S_radius = L_radius*(1-e*e)**0.5
 
     return L_radius,S_radius
 
+
+# 매뉴얼 출력 및 기능 수행
+def input_manual():
+    order = -1
+    while order != 0:
+        print('-------------------------------')
+        print('1. 중심항성 질량 수정')
+        print('2. 공전행성 정보 수정 및 추가')
+        print('3. 공전행성 정보 삭제')
+        print('0. 프로그램 종료')
+        print('-------------------------------')
+        
+        try:
+            order = input('사용할 기능의 숫자를 입력하세요\n>_ ')
+            order = int(order)
+        except ValueError as e:
+            print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}\n')
+
+
+input_values()
+input_manual()
