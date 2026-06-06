@@ -14,8 +14,6 @@ def star_input():
         return star_input()
 
 def input_values():
-    global planet_info
-
     star_mass,N = star_input()
     planet_info = {}
 
@@ -41,15 +39,17 @@ def input_values():
 
 
 # 그래프 계산
-def cal_oval(G,M,planet):
+def cal_oval(M,planet):
     from 이원준 import cal_ecc
     
-    AU__m = 1.5*10**11
+    G = 6.6743*10**-11
+    AU__m = 1.496*10**11
     km__m = 1000
+    Msolar__kg = 1.989*10**30
 
     r0_m = planet['peri_dist'] * AU__m
     v0_m = planet['peri_speed'] * km__m
-    L_radius = (2/r0_m - v0_m**2/(G*M))**-1 / AU__m
+    L_radius = (2/r0_m - v0_m**2/(G*(M*Msolar__kg)))**-1 / AU__m
 
     e = cal_ecc(planet,L_radius)
     S_radius = L_radius*(1-e*e)**0.5
@@ -57,7 +57,7 @@ def cal_oval(G,M,planet):
     return L_radius,S_radius
 
 
-# 매뉴얼 출력 및 기능 수행
+# 매뉴얼 입력
 def input_manual():
     print('\n-------------------------------')
     print('매뉴얼 \n')
@@ -76,6 +76,8 @@ def input_manual():
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
         return input_manual()
     
+
+# 현재 궤도시스템 정보 출력
 def sort_and_print(star_mass,planet_info):
     print('\n-------------------------------')
     print('매뉴얼 > 4. 현재 궤도시스템 정보 출력 \n')
@@ -92,7 +94,7 @@ def sort_and_print(star_mass,planet_info):
         order = int(order)
     except ValueError as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
-        sort_and_print(star_mass,planet_info)
+        return sort_and_print(star_mass,planet_info)
 
     print(f'\n항성 질량: {star_mass}M☉, 구성 행성 수: {len(planet_info)}')
 
