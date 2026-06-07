@@ -96,21 +96,36 @@ def sort_and_print(star_mass,planet_info):
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
         return sort_and_print(star_mass,planet_info)
 
-    print(f'\n항성 질량: {star_mass}M☉, 구성 행성 수: {len(planet_info)}')
+    print(f'\n항성 질량: {star_mass} M☉ | 구성 행성 수: {len(planet_info)}')
 
     if order == 1:
-        for planet in sorted(planet_info.items(), key=lambda x : x[0]):
-            print(*planet)
+        for planet,data in sorted(planet_info.items(), key=lambda x : x[0]):
+            print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
+                  f"평균 공전속력: {data['speed_av']:.2f} km/s | "
+                  f"이심률: {data['eccentricity']:.4f} | "
+                  f"주기: {data['period']:.2f} 년")
     elif order == 2:
         for planet in sorted(planet_info.items(), key=lambda x : x[1]['peri_dist']):
-            print(*planet)
+            print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
+                  f"평균 공전속력: {data['speed_av']:.2f} km/s | "
+                  f"이심률: {data['eccentricity']:.4f} | "
+                  f"주기: {data['period']:.2f} 년")
     elif order == 3:
         for planet in sorted(planet_info.items(), key=lambda x : x[1]['speed_av']):
-            print(*planet)
+            print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
+                  f"평균 공전속력: {data['speed_av']:.2f} km/s | "
+                  f"이심률: {data['eccentricity']:.4f} | "
+                  f"주기: {data['period']:.2f} 년")
     elif order == 4:
         for planet in sorted(planet_info.items(), key=lambda x : x[1]['period']):
-            print(*planet)
+            print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
+                  f"평균 공전속력: {data['speed_av']:.2f} km/s | "
+                  f"이심률: {data['eccentricity']:.4f} | "
+                  f"주기: {data['period']:.2f} 년")
     elif order == 5:
         for planet in sorted(planet_info.items(), key=lambda x : x[1]['eccentricity']):
-            print(*planet)
+            print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
+                  f"평균 공전속력: {data['speed_av']:.2f} km/s | "
+                  f"이심률: {data['eccentricity']:.4f} | "
+                  f"주기: {data['period']:.2f} 년")
     elif order != 0: sort_and_print(star_mass,planet_info)
