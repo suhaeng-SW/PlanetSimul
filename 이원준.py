@@ -13,10 +13,11 @@ def cal_ecc(Planet, Longer_Radius):
     if Eccentricity >0 and Eccentricity<1:
         Planet['eccentricity']=Eccentricity
     else:
-        print('Error: Wrong input')
+        Planet['eccentricity']=-1
     return Eccentricity
 
-def drawing_graph(Shorter_Radius, Longer_Radius, peri_x, peri_y):
+def drawing_graph(Shorter_Radius, Longer_Radius, Planet):
+    peri_x,peri_y = Planet['peri_pos']
     c = np.sqrt(Longer_Radius**2 - Shorter_Radius**2) #초점
     r = np.sqrt(peri_x**2 + peri_y**2)
     ux = peri_x/r
