@@ -55,7 +55,7 @@ def cal_oval(M,planet):
     return L_radius,S_radius
 
 
-# 매뉴얼 입력
+# 매뉴얼 입력 및 기능
 def input_manual():
     print('\n-------------------------------')
     print('매뉴얼 \n')
@@ -81,9 +81,6 @@ def remove_planet(planet_info):
         del planet_info[planet_removing]
     else: print('\n해당 행성은 조회되지 않습니다.\n')
 
-
-
-# 현재 궤도시스템 정보 출력
 def sort_and_print(star_mass,planet_info):
     #print(planet_info)
     print('\n-------------------------------')
