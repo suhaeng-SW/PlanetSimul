@@ -10,6 +10,7 @@ def star_input():
         return mass,N    
     except (ValueError, IndexError) as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+        input('\n계속하려면 아무 키나 입력하세요.')
         return star_input()
 
 def input_values(first=True, planet_info={}):
@@ -31,6 +32,7 @@ def input_values(first=True, planet_info={}):
                 break
             except ValueError as e:
                 print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+                input('\n계속하려면 아무 키나 입력하세요.')
 
     if first: return star_mass, planet_info
     else: return name
@@ -57,13 +59,13 @@ def cal_oval(M,planet):
 
 # 매뉴얼 입력 및 기능
 def input_manual():
-    print('\n-------------------------------')
+    print('\n------------------------------------')
     print('매뉴얼 \n')
     print('1. 공전행성 정보 수정 및 추가') # 이 기능은 input_values()가 동시에 수행함.
     print('2. 공전행성 정보 삭제')
     print('3. 현재 궤도시스템 정보 출력')
     print('0. 프로그램 종료')
-    print('-------------------------------')
+    print('------------------------------------')
     
     try:
         order = input('사용할 기능의 숫자를 입력하세요\n>_ ')
@@ -71,6 +73,7 @@ def input_manual():
         return order
     except ValueError as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+        input('\n계속하려면 아무 키나 입력하세요.')
         return input_manual()
     
 def remove_planet(planet_info):
@@ -83,7 +86,7 @@ def remove_planet(planet_info):
 
 def sort_and_print(star_mass,planet_info):
     #print(planet_info)
-    print('\n-------------------------------')
+    print('\n------------------------------------')
     print('매뉴얼 > 3. 현재 궤도시스템 정보 출력 \n')
     print('1. 이름 기준 정렬')
     print('2. 근일점 거리 기준 정렬')
@@ -91,7 +94,7 @@ def sort_and_print(star_mass,planet_info):
     print('4. 공전 주기 기준 정렬')
     print('5. 이심률 기준 정렬')
     print('0. 이전으로 돌아가기')
-    print('-------------------------------')
+    print('------------------------------------')
 
     try:
         order = input('정렬 기준을 숫자로 입력하세요\n>_ ')
@@ -133,3 +136,5 @@ def sort_and_print(star_mass,planet_info):
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order != 0: return sort_and_print(star_mass,planet_info)
+
+    if order != 0: input('\n계속하려면 아무 키나 입력하세요.')

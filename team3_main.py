@@ -8,6 +8,7 @@ for planet in planet_info.values():
     orbital_period(a,M,planet)
     drawing_graph(b,a,planet)
     planet['speed_av']=-1
+
 while True:
     order = input_manual()
     if order == 0: break
@@ -20,3 +21,5 @@ while True:
         remove_planet(planet_info)
     elif order == 3:
         sort_and_print(M,planet_info)
+
+print('\n프로그램을 종료합니다.')

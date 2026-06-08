@@ -14,7 +14,7 @@ def cal_ecc(Planet, Longer_Radius):
     if Eccentricity >0 and Eccentricity<1:
         Planet['eccentricity']=Eccentricity
     else:
-        Planet['eccentricity']=-1
+        print('Error: wrong input')
     return Eccentricity
 
 def drawing_graph(Shorter_Radius, Longer_Radius, Planet):
