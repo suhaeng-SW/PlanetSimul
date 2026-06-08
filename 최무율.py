@@ -7,8 +7,7 @@ def star_input():
         if mass <= 0 or N <= 0:
             raise ValueError('항성의 질량 및 행성의 개수는 0보다 커야 합니다.')
 
-        return mass,N
-    
+        return mass,N    
     except (ValueError, IndexError) as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
         return star_input()
@@ -29,9 +28,7 @@ def input_values():
                 planet_info[name] = {'peri_pos':[x0,y0],
                                      'peri_dist':(x0*x0+y0*y0)**0.5,
                                      'peri_speed':v0}
-
                 break
-
             except ValueError as e:
                 print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
 
@@ -105,27 +102,27 @@ def sort_and_print(star_mass,planet_info):
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order == 2:
-        for planet in sorted(planet_info.items(), key=lambda x : x[1]['peri_dist']):
+        for planet,data in sorted(planet_info.items(), key=lambda x : x[1]['peri_dist']):
             print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
                   f"평균 공전속력: {data['speed_av']:.2f} km/s | "
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order == 3:
-        for planet in sorted(planet_info.items(), key=lambda x : x[1]['speed_av']):
+        for planet,data in sorted(planet_info.items(), key=lambda x : x[1]['speed_av']):
             print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
                   f"평균 공전속력: {data['speed_av']:.2f} km/s | "
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order == 4:
-        for planet in sorted(planet_info.items(), key=lambda x : x[1]['period']):
+        for planet,data in sorted(planet_info.items(), key=lambda x : x[1]['period']):
             print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
                   f"평균 공전속력: {data['speed_av']:.2f} km/s | "
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order == 5:
-        for planet in sorted(planet_info.items(), key=lambda x : x[1]['eccentricity']):
+        for planet,data in sorted(planet_info.items(), key=lambda x : x[1]['eccentricity']):
             print(f"[{planet:^5}] 근일점 거리: {data['peri_dist']:.2f} AU | "
                   f"평균 공전속력: {data['speed_av']:.2f} km/s | "
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
-    elif order != 0: sort_and_print(star_mass,planet_info)
+    elif order != 0: return sort_and_print(star_mass,planet_info)
