@@ -12,7 +12,7 @@ def orbital_period(Longer_Radius,Main_Mass,Planet):
 def cal_ecc(Planet, Longer_Radius):
     Distance = Planet['peri_dist']
     Eccentricity = 1 - Distance/Longer_Radius
-    if Eccentricity >0 and Eccentricity<1:
+    if Eccentricity >= 0 and Eccentricity <= 1:
         Planet['eccentricity']=Eccentricity
     else:
         Planet['eccentricity']=float('inf')
