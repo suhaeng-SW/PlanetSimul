@@ -3,8 +3,11 @@ import numpy as np
 import math
 
 def orbital_period(Longer_Radius,Main_Mass,Planet):
-    Period = (Longer_Radius**3 / Main_Mass)**0.5
-    Planet['period']=Period
+    if Planet['eccentricity']!=float('inf'):
+        Period = (Longer_Radius**3 / Main_Mass)**0.5
+        Planet['period']=Period
+    else:
+        Planet['period']=float('inf')
 
 def cal_ecc(Planet, Longer_Radius):
     Distance = Planet['peri_dist']
