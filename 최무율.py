@@ -82,6 +82,7 @@ def remove_planet(planet_info):
     
     if planet_removing in planet_info.keys():
         del planet_info[planet_removing]
+        print('성공적으로 삭제되었습니다.')
     else: print('\n해당 행성은 조회되지 않습니다.\n')
 
 def sort_and_print(star_mass,planet_info):
@@ -97,8 +98,7 @@ def sort_and_print(star_mass,planet_info):
     print('------------------------------------')
 
     try:
-        order = input('정렬 기준을 숫자로 입력하세요\n>_ ')
-        order = int(order)
+        order = int(input('정렬 기준을 숫자로 입력하세요\n>_ '))
     except ValueError as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
         return sort_and_print(star_mass,planet_info)
