@@ -14,6 +14,7 @@ for name, planet in planet_info.items():
 plt.axis('equal')
 plt.legend()
 plt.show()
+
 while True:
     order = input_manual()
     if order == 0: break
