@@ -3,11 +3,17 @@ from 이원준 import *
 #from 김민수 import *
 
 M,planet_info = input_values()
-for planet in planet_info.values():
+plt.figure(figsize=(8,8))
+plt.scatter([0],[0],label='Star')
+
+for name, planet in planet_info.items():
     a,b = cal_oval(M,planet)
     orbital_period(a,M,planet)
-    drawing_graph(b,a,planet)
-    planet['speed_av']=-1
+    drawing_graph(a,b,planet,name)
+
+plt.axis('equal')
+plt.legend()
+plt.show()
 
 while True:
     order = input_manual()
