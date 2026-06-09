@@ -3,8 +3,9 @@ import numpy as np
 import math
 
 def orbital_period(Longer_Radius,Main_Mass,Planet):
-    G = 0.99893960704 #AU, yr, Mo기준
-    Period = 2*math.pi * (Longer_Radius**3 /G/Main_Mass)**0.5
+    #G = 0.99893960704 #AU, yr, Mo기준
+    #Period = 2*math.pi * (Longer_Radius**3 /G/Main_Mass)**0.5
+    Period = (Longer_Radius**3 / Main_Mass)**0.5
     Planet['period']=Period
 
 def cal_ecc(Planet, Longer_Radius):
@@ -16,7 +17,8 @@ def cal_ecc(Planet, Longer_Radius):
         Planet['eccentricity']=float('inf')
     return Eccentricity
 
-def drawing_graph(Shorter_Radius, Longer_Radius, peri_x, peri_y):
+def drawing_graph(Shorter_Radius, Longer_Radius, Planet):
+    peri_x,peri_y = Planet['peri_pos']
     c = np.sqrt(Longer_Radius**2 - Shorter_Radius**2) #초점
     r = np.sqrt(peri_x**2 + peri_y**2)
     ux = peri_x/r
