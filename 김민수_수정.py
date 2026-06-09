@@ -14,7 +14,7 @@ def cal_ecc(Planet, Longer_Radius):
 
 def cal_speed_av(planet, L_radius, S_radius):
     if planet.get('eccentricity', float('inf')) != float('inf'):
-        circumference = 2 * math.pi * math.sqrt((L_radius**2 + S_radius**2) / 2)
+        circumference = 2 * math.pi * L_radius
         speed_av = circumference / planet['period']
         planet['speed_av'] = speed_av
     else:
