@@ -6,11 +6,11 @@ M,planet_info = input_values()
 plt.figure(figsize=(8,8))
 plt.scatter([0],[0],label='Star')
 
-for name, planet in planet_info.items():
+for name,planet in planet_info.items():
     a,b = cal_oval(M,planet)
     orbital_period(a,M,planet)
     drawing_graph(a,b,planet,name)
-
+    planet['speed_av']=-1 # 임시처리
 plt.axis('equal')
 plt.legend()
 plt.show()
@@ -22,10 +22,19 @@ while True:
         planet_adding = input_values(first=False,planet_info=planet_info)
         a,b = cal_oval(M,planet_info[planet_adding])
         orbital_period(a,M,planet_info[planet_adding])
-        planet_info[planet_adding]['speed_av']=-1
+        planet_info[planet_adding]['speed_av']=-1 # 임시처리
     elif order == 2:
         remove_planet(planet_info)
     elif order == 3:
         sort_and_print(M,planet_info)
+    elif order == 4:
+        plt.figure(figsize=(8,8))
+        plt.scatter([0],[0],label='Star')
+        for name,planet in planet_info.items():
+            a,b = cal_oval(M,planet)
+            drawing_graph(a,b,planet,name)
+            plt.axis('equal')
+            plt.legend()
+            plt.show()
 
-print('\n프로그램을 종료합니다.')
+print('\n프로그램을 종료합니다. >:3')
