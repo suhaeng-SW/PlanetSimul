@@ -13,7 +13,7 @@ def cal_ecc(Planet, Longer_Radius):
     if Eccentricity >0 and Eccentricity<1:
         Planet['eccentricity']=Eccentricity
     else:
-        print('Error: Wrong input')
+        Planet['eccentricity']=float('inf')
     return Eccentricity
 
 def drawing_graph(Shorter_Radius, Longer_Radius, peri_x, peri_y):
@@ -36,8 +36,8 @@ def drawing_graph(Shorter_Radius, Longer_Radius, peri_x, peri_y):
 
     plt.figure(figsize=(8,8))
     plt.plot(rotate_x,rotate_y)
-    plt.scatter([0], [0], label='항성')
-    plt.scatter([peri_x], [peri_y], label="근일점")
+    plt.scatter([0], [0], label='Your Star')
+    plt.scatter([peri_x], [peri_y], label="Perihelion")
     plt.axis('equal')
     plt.legend()
     plt.show()
