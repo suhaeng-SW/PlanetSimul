@@ -17,31 +17,34 @@ def cal_ecc(Planet, Longer_Radius):
         Planet['eccentricity']=float('inf')
     return Eccentricity
 
-def drawing_graph(Shorter_Radius, Longer_Radius, Planet):
-    peri_x,peri_y = Planet['peri_pos']
-    c = np.sqrt(Longer_Radius**2 - Shorter_Radius**2) #초점
+def drawing_graph(Longer_Radius, Shorter_Radius, Planet, name):
+
+    peri_x, peri_y = Planet['peri_pos']
+
+    L = Longer_Radius
+    S = Shorter_Radius
+
+    c = np.sqrt(L**2 - S**2)
+
     r = np.sqrt(peri_x**2 + peri_y**2)
-    ux = peri_x/r
-    uy = peri_y/r
 
-    center_x = 0 - c*ux
-    center_y = 0 - c*uy
+    ux = peri_x / r
+    uy = peri_y / r
 
-    theta = np.arctan2(peri_y,peri_x)
-    t = np.linspace(0, 2*np.pi, 1000)
+    center_x = -c * ux
+    center_y = -c * uy
 
-    x = Longer_Radius*np.cos(t)
-    y = Shorter_Radius*np.sin(t)
+    theta = np.arctan2(peri_y, peri_x)
 
-    rotate_x = x*np.cos(theta)-y*np.sin(theta) + center_x
-    rotate_y = x*np.sin(theta)+y*np.cos(theta) + center_y
+    t = np.linspace(0,2*np.pi,1000)
 
-    plt.figure(figsize=(8,8))
-    plt.plot(rotate_x,rotate_y)
-    plt.scatter([0], [0], label='Your Star')
-    plt.scatter([peri_x], [peri_y], label="Perihelion")
-    plt.axis('equal')
-    plt.legend()
-    plt.show()
+    x = L*np.cos(t)
+    y = S*np.sin(t)
+
+    rotate_x = x*np.cos(theta) - y*np.sin(theta) + center_x
+    rotate_y = x*np.sin(theta) + y*np.cos(theta) + center_y
+
+    plt.plot(rotate_x, rotate_y, label=name)
+    plt.scatter([peri_x],[peri_y])
 
 

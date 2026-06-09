@@ -10,11 +10,12 @@ def star_input():
         return mass,N    
     except (ValueError, IndexError) as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+        input('\n계속하려면 아무 키나 입력하세요.')
         return star_input()
 
-def input_values():
-    star_mass,N = star_input()
-    planet_info = {}
+def input_values(first=True, planet_info={}):
+    if first: star_mass,N = star_input()
+    else: N = 1
 
     for _ in range(N):
         while True:
@@ -31,8 +32,10 @@ def input_values():
                 break
             except ValueError as e:
                 print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+                input('\n계속하려면 아무 키나 입력하세요.')
 
-    return star_mass, planet_info
+    if first: return star_mass, planet_info
+    else: return name
 
 
 # 그래프 계산
@@ -54,16 +57,15 @@ def cal_oval(M,planet):
     return L_radius,S_radius
 
 
-# 매뉴얼 입력
+# 매뉴얼 입력 및 기능
 def input_manual():
-    print('\n-------------------------------')
+    print('\n------------------------------------')
     print('매뉴얼 \n')
-    print('1. 중심항성 질량 수정')
-    print('2. 공전행성 정보 수정 및 추가')
-    print('3. 공전행성 정보 삭제')
-    print('4. 현재 궤도시스템 정보 출력')
+    print('1. 공전행성 정보 수정 및 추가') # 이 기능은 input_values()가 동시에 수행함.
+    print('2. 공전행성 정보 삭제')
+    print('3. 현재 궤도시스템 정보 출력')
     print('0. 프로그램 종료')
-    print('-------------------------------')
+    print('------------------------------------')
     
     try:
         order = input('사용할 기능의 숫자를 입력하세요\n>_ ')
@@ -71,20 +73,28 @@ def input_manual():
         return order
     except ValueError as e:
         print(f'\n입력 형식이 잘못되었습니다! 다시 입력해주세요 :( \n{e}')
+        input('\n계속하려면 아무 키나 입력하세요.')
         return input_manual()
     
+def remove_planet(planet_info):
+    print(f'현재 행성 목록 | {*planet_info.keys(),}')
+    planet_removing = input('\n삭제할 행성의 이름을 입력하세요\n>_ ')
+    
+    if planet_removing in planet_info.keys():
+        del planet_info[planet_removing]
+    else: print('\n해당 행성은 조회되지 않습니다.\n')
 
-# 현재 궤도시스템 정보 출력
 def sort_and_print(star_mass,planet_info):
-    print('\n-------------------------------')
-    print('매뉴얼 > 4. 현재 궤도시스템 정보 출력 \n')
+    #print(planet_info)
+    print('\n------------------------------------')
+    print('매뉴얼 > 3. 현재 궤도시스템 정보 출력 \n')
     print('1. 이름 기준 정렬')
     print('2. 근일점 거리 기준 정렬')
     print('3. 평균 공전 속력 기준 정렬')
     print('4. 공전 주기 기준 정렬')
     print('5. 이심률 기준 정렬')
     print('0. 이전으로 돌아가기')
-    print('-------------------------------')
+    print('------------------------------------')
 
     try:
         order = input('정렬 기준을 숫자로 입력하세요\n>_ ')
@@ -126,3 +136,5 @@ def sort_and_print(star_mass,planet_info):
                   f"이심률: {data['eccentricity']:.4f} | "
                   f"주기: {data['period']:.2f} 년")
     elif order != 0: return sort_and_print(star_mass,planet_info)
+
+    if order != 0: input('\n계속하려면 아무 키나 입력하세요.')
