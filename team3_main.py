@@ -23,9 +23,9 @@ plt.show()
 
 print_final(planet_info)
 input('\n계속하려면 아무 키나 입력하세요.')
-print('\n'*10)
 
 while True:
+    print('\n'*10)
     order = input_manual()
     if order == 0: break
     elif order == 1:
@@ -43,8 +43,8 @@ while True:
         for name,planet in planet_info.items():
             a,b = cal_oval(M,planet)
             drawing_graph(a,b,planet,name)
-            plt.axis('equal')
-            plt.legend()
-            plt.show()
+        plt.axis('equal')
+        plt.legend()
+        plt.show()
 
 print('\n프로그램을 종료합니다. >:3')
